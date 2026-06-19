@@ -1,74 +1,66 @@
 # Roadmap
 
-DevJourney is complete through its initial seven-phase portfolio build. Future work can deepen production readiness and polish.
+DevJourney is complete through its original seven-phase build. The items below are realistic next improvements based on gaps in the current codebase.
 
-## Completed
+## Completed Project Phases
 
-### Phase 1: Foundation
+1. Foundation: Compose, Material 3, Hilt, navigation shell, design system, and feature routes.
+2. Data layer: domain models, Room, DAOs, fake API, mappers, repositories, and demo seeding.
+3. Roadmaps and topics: list/detail flows, filtering, completion, section progress, and bookmarks.
+4. Notes and goals: notes CRUD/search and cadence-based goal tracking.
+5. Challenges, resources, and search: filters, completion, bookmarks, and debounced global search.
+6. Analytics and settings: derived analytics, DataStore preferences, and WorkManager scheduling.
+7. Open-source polish: README, docs, contribution files, templates, license, and CI.
 
-- Compose app shell.
-- Hilt bootstrap.
-- Material 3 theme and design system.
-- Drawer and bottom navigation.
-- Placeholder feature routes.
+See the individual `PHASE_X_SUMMARY.md` files for implementation and learning details.
 
-### Phase 2: Data Layer
+## Priority 1: Close Existing Functional Gaps
 
-- Domain models and repository contracts.
-- Room entities, DAOs, database, and schema export.
-- Fake API DTOs and deterministic demo catalog.
-- Mapper layer and repository implementations.
-- Startup demo data seeding.
+- Replace static Dashboard values with a repository-backed Dashboard ViewModel and aggregation use case.
+- Post a real reminder notification from `LearningReminderWorker`.
+- Add Android 13+ notification permission handling and notification channel creation.
+- Connect selected roadmap persistence to an explicit user-facing learning-plan workflow.
 
-### Phase 3: Roadmaps And Topics
+## Priority 2: Testing
 
-- Roadmap list, filters, and search.
-- Roadmap detail with expandable sections.
-- Topic detail with objectives, resources, notes, completion, and bookmarking.
-- Progress tracking through use cases.
+- Add `kotlinx-coroutines-test` and ViewModel tests.
+- Add Room DAO tests for notes, progress, bookmarks, goals, challenges, and resources.
+- Add Compose UI tests for roadmap/topic progress, notes CRUD, search, analytics, and settings.
+- Add DataStore and WorkManager integration tests.
+- Add database migration tests before increasing the Room schema version.
 
-### Phase 4: Notes And Goals
+## Priority 3: Offline Sync
 
-- Notes CRUD and search.
-- Topic attachment for notes.
-- Daily, weekly, and monthly goal progress.
-- Goal summary calculations and tests.
+- Replace the fake API with a real HTTP client behind the existing data boundaries.
+- Add refresh timestamps and explicit sync state.
+- Add retry/backoff and network constraints.
+- Define conflict resolution for progress, notes, goals, and bookmarks.
+- Add an upload queue for local writes.
+- Add pagination if catalog/resource size grows.
 
-### Phase 5: Challenges, Resources, Search
+## Priority 4: UI And Accessibility
 
-- Coding challenge filters and completion flow.
-- Resource search, type filters, and bookmarks.
-- Global search across learning entities.
-- Phase-specific use case tests.
+- Capture and publish screenshots under `docs/images`.
+- Audit semantics, touch targets, contrast, and screen-reader labels.
+- Add adaptive layouts for tablets and foldables.
+- Add richer Markdown rendering for notes.
+- Improve empty/error recovery actions.
+- Add visual regression or screenshot tests for design-system components.
 
-### Phase 6: Analytics And Settings
+## Priority 5: Project Scale
 
-- Analytics dashboard with streaks, completion rate, weekly/monthly progress, and goal rate.
-- DataStore settings for theme, dynamic color, reminders, selected roadmap, and first launch.
-- WorkManager reminder scheduling.
-- Analytics and settings tests.
+- Modularize into core, domain, data, and feature Gradle modules when build time warrants it.
+- Introduce typed navigation and feature navigation APIs.
+- Add dependency update automation and stricter CI checks.
+- Add coverage reporting and static analysis beyond Android lint.
+- Document release signing and distribution once the app has a release target.
 
-### Phase 7: Open-Source Polish
+## Optional Product Ideas
 
-- README finalization.
-- Documentation set.
-- Contribution, conduct, security, changelog, and license files.
-- GitHub issue templates, pull request template, and CI workflow.
+- Import/export notes and progress.
+- Multiple learning plans.
+- Achievement badges and streak recovery.
+- Recommendations based on difficulty, progress, goals, and bookmarks.
+- Optional authenticated cloud sync.
 
-## Near-Term Improvements
-
-- Make the dashboard fully repository-backed.
-- Add more Room DAO and migration tests.
-- Add Compose UI tests for key workflows.
-- Add screenshot assets and visual QA guidance.
-- Add notification permission handling for Android 13+ if real notifications are introduced.
-- Add import/export for notes and learning progress.
-
-## Longer-Term Ideas
-
-- Optional cloud sync behind repository interfaces.
-- Multi-plan learning schedules.
-- Rich Markdown rendering for notes.
-- Achievement badges and more nuanced streak recovery.
-- Learning recommendations based on progress, difficulty, and bookmarked resources.
-- Modularization into `core`, `data`, `domain`, and feature Gradle modules.
+These ideas are not implemented and should remain behind clear product requirements before architecture is expanded.
