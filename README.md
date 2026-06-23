@@ -72,7 +72,7 @@ See [Architecture](docs/ARCHITECTURE.md) for the complete data-flow explanation.
 ## Folder Structure
 
 ```text
-com.example.devjourney/
+co.bitfuse.devjourney/
   DevJourneyApp.kt
   MainActivity.kt
   MainViewModel.kt
